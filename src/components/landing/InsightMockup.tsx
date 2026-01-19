@@ -7,7 +7,7 @@ const InsightMockup = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Content */}
           <div className="order-2 lg:order-1">
-            <span className="highlight-badge mb-4 inline-block">The Insight Mockup</span>
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Every call becomes a{" "}
               <span className="gradient-text">learning opportunity</span>

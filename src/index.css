@@ -130,11 +130,11 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/30 dark:border-slate-700/30 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50;
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-black/5 dark:border-slate-700/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-slate-900/50;
   }
 
   .glass-card-strong {
-    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-white/40 dark:border-slate-700/40 shadow-xl shadow-slate-200/60 dark:shadow-slate-900/60;
+    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-black/5 dark:border-slate-700/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-slate-900/60;
   }
 
   .gradient-text {

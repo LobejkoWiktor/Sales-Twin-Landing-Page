@@ -7,10 +7,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Product", href: "#" },
-    { label: "Pricing", href: "#" },
-    { label: "Company", href: "#" },
-    { label: "Resources", href: "#" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Features", href: "#features" },
+    { label: "Insights", href: "#insights" },
   ];
 
   return (
@@ -42,11 +41,13 @@ const Header = () => {
             {/* Desktop CTAs */}
             <div className="hidden md:flex items-center gap-3">
               <ThemeToggle />
-              <Button variant="ghost" size="sm">
-                Sign In
-              </Button>
-              <Button variant="default" size="sm">
-                Start Free Trial
+
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Request Demo
               </Button>
             </div>
 
@@ -77,11 +78,16 @@ const Header = () => {
                     <span className="text-sm font-medium text-muted-foreground">Theme</span>
                     <ThemeToggle />
                   </div>
-                  <Button variant="ghost" size="sm" className="justify-start">
-                    Sign In
-                  </Button>
-                  <Button variant="default" size="sm">
-                    Start Free Trial
+
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={() => {
+                      document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' });
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Request Demo
                   </Button>
                 </div>
               </div>
