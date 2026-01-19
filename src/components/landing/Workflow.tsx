@@ -27,7 +27,6 @@ const Workflow = () => {
       <div className="container px-4 md:px-6">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="highlight-badge mb-4 inline-block">How It Works</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Three steps to sales excellence
           </h2>
