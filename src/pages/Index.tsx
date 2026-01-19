@@ -4,6 +4,7 @@ import Workflow from "@/components/landing/Workflow";
 import Features from "@/components/landing/Features";
 import InsightMockup from "@/components/landing/InsightMockup";
 import CTA from "@/components/landing/CTA";
+import Team from "@/components/landing/Team";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => {
@@ -22,6 +23,7 @@ const Index = () => {
           <InsightMockup />
         </div>
         <CTA />
+        <Team />
       </main>
       <Footer />
     </div>
