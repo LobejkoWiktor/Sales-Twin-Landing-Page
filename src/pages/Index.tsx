@@ -22,8 +22,10 @@ const Index = () => {
         <div id="insights">
           <InsightMockup />
         </div>
+        <div id="team">
+          <Team />
+        </div>
         <CTA />
-        <Team />
       </main>
       <Footer />
     </div>
