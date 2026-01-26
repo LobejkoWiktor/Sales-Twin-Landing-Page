@@ -1,33 +1,33 @@
 const teamMembers = [
     {
-        name: "Alex Thompson",
-        role: "Lead Engineer",
-        description: "Full-stack developer with 8+ years building scalable AI solutions. Passionate about creating intuitive user experiences.",
-        image: "/images/team/member1.png",
+        name: "Amadou Coulibaly",
+        role: "Backend & Architecture",
+        description: "Backend Engineer with 7+ years of experience building distributed systems; M.Sc. graduate of PJATK",
+        image: "/images/team/Amadou.png",
     },
     {
-        name: "Sarah Chen",
-        role: "Product Manager",
-        description: "Product strategist focused on bridging technology and business needs. Expert in sales enablement platforms.",
-        image: "/images/team/member2.png",
+        name: "Jakub Kiernozek",
+        role: "Product & Backend",
+        description: "AI Engineer & Backend Developer, M.Sc. graduate of Warsaw University of Technology.",
+        image: "/images/team/Jakub.png",
     },
     {
-        name: "Michael Rodriguez",
-        role: "UX Designer",
-        description: "Creative designer specializing in modern web interfaces. Believes great design drives user engagement.",
-        image: "/images/team/member3.png",
+        name: "Mateusz Błajda",
+        role: "ML & AI Engineer",
+        description: "ML Researcher with years of commercial expertise specializing in LLMs and Text-to-Speech synthesis graduated University of Warsaw.",
+        image: "/images/team/Mateusz.png",
     },
     {
-        name: "Emma Williams",
-        role: "Sales Specialist",
-        description: "Sales professional turned product evangelist. Understands the challenges sales teams face every day.",
-        image: "/images/team/member4.png",
+        name: "Wiktor Łobejko",
+        role: "Frontend",
+        description: "Mobile developer with 5 years of experience in building solutions for the banking sector. Specialized in robust, user centric platforms.",
+        image: "/images/team/Wiktor.png",
     },
     {
-        name: "David Park",
-        role: "Data Scientist",
-        description: "AI researcher focused on conversational AI and natural language processing. PhD in Machine Learning.",
-        image: "/images/team/member5.png",
+        name: "Zuza Celejwska",
+        role: "Product",
+        description: "SGH student with business experience in sales and e-commerce.",
+        image: "/images/team/Zuza.png",
     },
 ];
 
@@ -62,7 +62,7 @@ const Team = () => {
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="w-full h-full object-cover"
+                                        className={`w-full h-full object-cover ${member.name === 'Wiktor Łobejko' ? 'object-top' : ''}`}
                                     />
                                 </div>
 
