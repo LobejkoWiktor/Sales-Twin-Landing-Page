@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Hero = () => {
+  const { toast } = useToast();
   return (
     <section className="relative flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-secondary/30 pt-32 pb-20">
       {/* Decorative background elements */}
@@ -31,12 +33,19 @@ const Hero = () => {
               variant="hero"
               size="lg"
               className="group"
-              onClick={() => document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => window.open('https://sales-ai-coach-two.vercel.app/', '_blank')}
             >
-              Request Demo
+              Test it yourself
               <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="heroOutline" size="lg">
+            <Button
+              variant="heroOutline"
+              size="lg"
+              onClick={() => toast({
+                title: "Coming Soon",
+                description: "The video will be available soon!",
+              })}
+            >
               <Play className="w-4 h-4 mr-1" />
               Watch Video
             </Button>

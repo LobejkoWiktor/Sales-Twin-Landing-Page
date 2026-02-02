@@ -48,9 +48,9 @@ const Header = () => {
               <Button
                 variant="default"
                 size="sm"
-                onClick={() => document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => window.open('https://sales-ai-coach-two.vercel.app/', '_blank')}
               >
-                Request Demo
+                Test it yourself
               </Button>
             </div>
 
@@ -86,11 +86,11 @@ const Header = () => {
                     variant="default"
                     size="sm"
                     onClick={() => {
-                      document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' });
+                      window.open('https://sales-ai-coach-two.vercel.app/', '_blank');
                       setIsMobileMenuOpen(false);
                     }}
                   >
-                    Request Demo
+                    Test it yourself
                   </Button>
                 </div>
               </div>
