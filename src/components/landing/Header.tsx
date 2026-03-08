@@ -11,6 +11,7 @@ const Header = () => {
     { label: "Features", href: "#features" },
     { label: "Insights", href: "#insights" },
     { label: "Meet the team", href: "#team" },
+    { label: "Contact Us", href: "#request-demo" },
   ];
 
   return (
@@ -91,6 +92,16 @@ const Header = () => {
                     }}
                   >
                     Test it yourself
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      document.getElementById('request-demo')?.scrollIntoView({ behavior: 'smooth' });
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Contact Us
                   </Button>
                 </div>
               </div>
