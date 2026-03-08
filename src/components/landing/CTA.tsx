@@ -1,10 +1,47 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
 
 const CTA = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError(null);
+
+    const formData = {
+      name: `${firstName} ${lastName}`.trim(),
+      email: email,
+      message: message,
+    };
+
+    const { error: dbError } = await supabase
+      .from("contact_submissions")
+      .insert([formData]);
+
+    setLoading(false);
+
+    if (dbError) {
+      setError("Something went wrong. Please try again.");
+    } else {
+      setSuccess(true);
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setMessage("");
+    }
+  };
+
   return (
     <section id="request-demo" className="py-24 bg-background relative overflow-hidden">
       {/* Background decorations */}
@@ -31,40 +68,85 @@ const CTA = () => {
             Join the teams already using SalesTwin to onboard faster, close more deals, and build a world-class sales organization.
           </p>
 
-          {/* CTA Button */}
           {/* Contact Form */}
           <div className="max-w-2xl mx-auto glass-card p-8 rounded-2xl text-left">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" placeholder="John" />
+            {success ? (
+              <div className="flex flex-col items-center justify-center gap-4 py-8 text-center">
+                <CheckCircle className="w-12 h-12 text-green-500" />
+                <p className="text-xl font-semibold text-foreground">Message sent!</p>
+                <p className="text-muted-foreground">We'll be in touch soon.</p>
+                <Button variant="ghost" onClick={() => setSuccess(false)}>
+                  Send another message
+                </Button>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" placeholder="Doe" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Work Email</Label>
-                <Input id="email" type="email" placeholder="john@company.com" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Company</Label>
-                <Input id="company" placeholder="Acme Inc." />
-              </div>
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="teamSize">Team Size</Label>
-                <Input id="teamSize" placeholder="e.g. 10-50" />
-              </div>
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="How can we help you?" className="min-h-[100px]" />
-              </div>
-            </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      placeholder="John"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      placeholder="Doe"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="How can we help you?"
+                      className="min-h-[100px]"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </div>
+                </div>
 
-            <Button variant="hero" size="lg" className="w-full group">
-              Request Demo
-              <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
-            </Button>
+                {error && (
+                  <p className="text-sm text-red-500 mb-4">{error}</p>
+                )}
+
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="w-full group"
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Contact us
+                      <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
