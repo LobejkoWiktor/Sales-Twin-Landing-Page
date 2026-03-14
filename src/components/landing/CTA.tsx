@@ -14,8 +14,26 @@ const CTA = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ firstName?: string; email?: string; message?: string }>({});
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleSubmit = async () => {
+    // Validate required fields
+    const errors: { firstName?: string; email?: string; message?: string } = {};
+    if (!firstName.trim()) errors.firstName = "First name is required.";
+    if (!email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!message.trim()) errors.message = "Message is required.";
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+    setFieldErrors({});
     setLoading(true);
     setError(null);
 
@@ -83,42 +101,49 @@ const CTA = () => {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
                     <Input
                       id="firstName"
                       placeholder="John"
+                      maxLength={50}
                       value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
+                      onChange={(e) => { setFirstName(e.target.value); setFieldErrors((prev) => ({ ...prev, firstName: undefined })); }}
                     />
+                    {fieldErrors.firstName && <p className="text-xs text-red-500">{fieldErrors.firstName}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
                     <Input
                       id="lastName"
                       placeholder="Doe"
+                      maxLength={70}
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
                   <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="john@company.com"
+                      maxLength={254}
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => { setEmail(e.target.value); setFieldErrors((prev) => ({ ...prev, email: undefined })); }}
                     />
+                    {fieldErrors.email && <p className="text-xs text-red-500">{fieldErrors.email}</p>}
                   </div>
                   <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message">Message <span className="text-red-500">*</span></Label>
                     <Textarea
                       id="message"
                       placeholder="How can we help you?"
                       className="min-h-[100px]"
+                      maxLength={2000}
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={(e) => { setMessage(e.target.value); setFieldErrors((prev) => ({ ...prev, message: undefined })); }}
                     />
+                    {fieldErrors.message && <p className="text-xs text-red-500">{fieldErrors.message}</p>}
                   </div>
                 </div>
 
