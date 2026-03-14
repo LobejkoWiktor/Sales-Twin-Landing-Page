@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Sparkles, CheckCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
+import { sanitizeText } from "@/lib/sanitize";
 
 const CTA = () => {
   const [firstName, setFirstName] = useState("");
@@ -38,9 +39,9 @@ const CTA = () => {
     setError(null);
 
     const formData = {
-      name: `${firstName} ${lastName}`.trim(),
-      email: email,
-      message: message,
+      name: sanitizeText(`${firstName} ${lastName}`, 121),
+      email: sanitizeText(email, 254),
+      message: sanitizeText(message, 2000),
     };
 
     const { error: dbError } = await supabase
