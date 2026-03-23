@@ -6,8 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Sparkles, CheckCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { sanitizeText } from "@/lib/sanitize";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
 const CTA = () => {
+  const { language } = useLanguage();
+  const t = translations[language].cta;
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,15 +25,14 @@ const CTA = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleSubmit = async () => {
-    // Validate required fields
     const errors: { firstName?: string; email?: string; message?: string } = {};
-    if (!firstName.trim()) errors.firstName = "First name is required.";
+    if (!firstName.trim()) errors.firstName = t.firstNameRequired;
     if (!email.trim()) {
-      errors.email = "Email is required.";
+      errors.email = t.emailRequired;
     } else if (!emailRegex.test(email)) {
-      errors.email = "Please enter a valid email address.";
+      errors.email = t.emailInvalid;
     }
-    if (!message.trim()) errors.message = "Message is required.";
+    if (!message.trim()) errors.message = t.messageRequired;
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
@@ -51,7 +55,7 @@ const CTA = () => {
     setLoading(false);
 
     if (dbError) {
-      setError("Something went wrong. Please try again.");
+      setError(t.dbError);
     } else {
       setSuccess(true);
       setFirstName("");
@@ -78,13 +82,13 @@ const CTA = () => {
 
           {/* Headline */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Ready to transform your{" "}
-            <span className="gradient-text">sales culture</span>?
+            {t.headline1}{" "}
+            <span className="gradient-text">{t.headlineHighlight}</span>{t.headline2}
           </h2>
 
           {/* Description */}
           <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-            Join the teams already using SalesTwin to onboard faster, close more deals, and build a world-class sales organization.
+            {t.description}
           </p>
 
           {/* Contact Form */}
@@ -92,20 +96,20 @@ const CTA = () => {
             {success ? (
               <div className="flex flex-col items-center justify-center gap-4 py-8 text-center">
                 <CheckCircle className="w-12 h-12 text-green-500" />
-                <p className="text-xl font-semibold text-foreground">Message sent!</p>
-                <p className="text-muted-foreground">We'll be in touch soon.</p>
+                <p className="text-xl font-semibold text-foreground">{t.successTitle}</p>
+                <p className="text-muted-foreground">{t.successMessage}</p>
                 <Button variant="ghost" onClick={() => setSuccess(false)}>
-                  Send another message
+                  {t.sendAnother}
                 </Button>
               </div>
             ) : (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
+                    <Label htmlFor="firstName">{t.firstNameLabel} <span className="text-red-500">*</span></Label>
                     <Input
                       id="firstName"
-                      placeholder="John"
+                      placeholder={t.firstNamePlaceholder}
                       maxLength={50}
                       value={firstName}
                       onChange={(e) => { setFirstName(e.target.value); setFieldErrors((prev) => ({ ...prev, firstName: undefined })); }}
@@ -113,21 +117,21 @@ const CTA = () => {
                     {fieldErrors.firstName && <p className="text-xs text-red-500">{fieldErrors.firstName}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="lastName">{t.lastNameLabel}</Label>
                     <Input
                       id="lastName"
-                      placeholder="Doe"
+                      placeholder={t.lastNamePlaceholder}
                       maxLength={70}
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
                   <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
+                    <Label htmlFor="email">{t.emailLabel} <span className="text-red-500">*</span></Label>
                     <Input
                       id="email"
                       type="email"
-                      placeholder="john@company.com"
+                      placeholder={t.emailPlaceholder}
                       maxLength={254}
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setFieldErrors((prev) => ({ ...prev, email: undefined })); }}
@@ -135,10 +139,10 @@ const CTA = () => {
                     {fieldErrors.email && <p className="text-xs text-red-500">{fieldErrors.email}</p>}
                   </div>
                   <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="message">Message <span className="text-red-500">*</span></Label>
+                    <Label htmlFor="message">{t.messageLabel} <span className="text-red-500">*</span></Label>
                     <Textarea
                       id="message"
-                      placeholder="How can we help you?"
+                      placeholder={t.messagePlaceholder}
                       className="min-h-[100px]"
                       maxLength={2000}
                       value={message}
@@ -162,11 +166,11 @@ const CTA = () => {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending…
+                      {t.sending}
                     </>
                   ) : (
                     <>
-                      Contact us
+                      {t.sendButton}
                       <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
                     </>
                   )}

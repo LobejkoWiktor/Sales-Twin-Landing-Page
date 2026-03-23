@@ -1,5 +1,9 @@
-const Footer = () => {
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
+const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
 
   return (
     <footer className="bg-secondary/50 border-t border-border">
@@ -14,7 +18,7 @@ const Footer = () => {
               <span className="text-xl font-bold text-foreground">SalesTwin</span>
             </a>
             <p className="text-sm text-muted-foreground">
-              AI-powered sales training that transforms how teams learn and close.
+              {t.tagline}
             </p>
           </div>
         </div>
@@ -22,7 +26,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 SalesTwin. All rights reserved.
+            {t.copyright}
           </p>
         </div>
       </div>

@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
 const Hero = () => {
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = translations[language].hero;
+
   return (
     <section className="relative flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-secondary/30 pt-32 pb-20">
       {/* Decorative background elements */}
@@ -17,14 +22,14 @@ const Hero = () => {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-foreground mb-6 animate-fade-up text-balance" style={{ animationDelay: '0.2s' }}>
-            Onboard sales reps{" "}
-            <span className="gradient-text">3x faster</span>{" "}
-            with AI-powered training
+            {t.headlinePart1}{" "}
+            <span className="gradient-text">{t.headlineHighlight}</span>{" "}
+            {t.headlinePart2}
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 animate-fade-up text-balance" style={{ animationDelay: '0.3s' }}>
-            Empower your sales team to practice in a risk-free environment. Simulate conversations, configure challenging customer personas, and analyze performance—all in one platform.
+            {t.subheadline}
           </p>
 
           {/* CTAs */}
@@ -35,19 +40,19 @@ const Hero = () => {
               className="group"
               onClick={() => window.open('https://sales-ai-coach-two.vercel.app/', '_blank')}
             >
-              Test it yourself
+              {t.testButton}
               <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
               variant="heroOutline"
               size="lg"
               onClick={() => toast({
-                title: "Coming Soon",
-                description: "The video will be available soon!",
+                title: t.comingSoonTitle,
+                description: t.comingSoonDesc,
               })}
             >
               <Play className="w-4 h-4 mr-1" />
-              Watch Video
+              {t.watchVideo}
             </Button>
           </div>
 

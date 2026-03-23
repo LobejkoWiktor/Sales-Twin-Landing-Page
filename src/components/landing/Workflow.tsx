@@ -1,37 +1,30 @@
 import { Package, UserCog, Sparkles } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
-const steps = [
-  {
-    number: "01",
-    icon: Package,
-    title: "Select Your Offer",
-    description: "Choose the product or service you want to master selling. Upload your pitch decks, product specs, or let AI learn from your existing materials.",
-  },
-  {
-    number: "02",
-    icon: UserCog,
-    title: "Define the Persona",
-    description: "Set personality traits, difficulty levels, and specific conversation goals. From friendly prospects to assertive negotiators—you decide.",
-  },
-  {
-    number: "03",
-    icon: Sparkles,
-    title: "Practice & Excel",
-    description: "Conduct voice or text simulations and receive instant, actionable feedback. Track progress over time and watch your team transform.",
-  },
-];
+const icons = [Package, UserCog, Sparkles];
 
 const Workflow = () => {
+  const { language } = useLanguage();
+  const t = translations[language].workflow;
+
+  const steps = t.steps.map((step, i) => ({
+    number: String(i + 1).padStart(2, "0"),
+    icon: icons[i],
+    title: step.title,
+    description: step.description,
+  }));
+
   return (
     <section className="py-24 bg-gradient-to-b from-secondary/30 to-background">
       <div className="container px-4 md:px-6">
         {/* Section header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Three steps to sales excellence
+            {t.sectionTitle}
           </h2>
           <p className="text-lg text-muted-foreground">
-            A streamlined workflow that takes your team from onboarding to closing deals faster than ever.
+            {t.sectionDesc}
           </p>
         </div>
 

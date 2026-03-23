@@ -3,12 +3,18 @@ import { Input } from "@/components/ui/input";
 import { Menu, X, Mail, ArrowRight, Loader2, CheckCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
+import LanguageToggle from "@/components/LanguageToggle";
 import { supabase } from "@/lib/supabaseClient";
 import { sanitizeText } from "@/lib/sanitize";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/translations";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
+  const { language } = useLanguage();
+  const t = translations[language].waitlist;
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -16,8 +22,8 @@ const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
   const [dbError, setDbError] = useState<string | null>(null);
 
   const handleJoin = async () => {
-    if (!email.trim()) { setEmailError("Email is required."); return; }
-    if (!EMAIL_REGEX.test(email)) { setEmailError("Please enter a valid email address."); return; }
+    if (!email.trim()) { setEmailError(t.emailRequired); return; }
+    if (!EMAIL_REGEX.test(email)) { setEmailError(t.emailInvalid); return; }
     setEmailError(null);
     setDbError(null);
     setLoading(true);
@@ -28,7 +34,7 @@ const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
 
     setLoading(false);
     if (error) {
-      setDbError("Something went wrong. Please try again.");
+      setDbError(t.dbError);
     } else {
       setSuccess(true);
     }
@@ -38,25 +44,25 @@ const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
     <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl p-4 shadow-xl z-50 border border-border bg-popover text-popover-foreground">
       <div className="flex items-center gap-2 mb-3">
         <Mail className="w-4 h-4 text-primary" />
-        <span className="text-sm font-semibold text-foreground">Join the Waitlist</span>
+        <span className="text-sm font-semibold text-foreground">{t.title}</span>
       </div>
 
       {success ? (
         <div className="flex flex-col items-center gap-2 py-4 text-center">
           <CheckCircle className="w-8 h-8 text-green-500" />
-          <p className="text-sm font-semibold text-foreground">You're on the list!</p>
-          <p className="text-xs text-muted-foreground">We'll reach out when we launch.</p>
+          <p className="text-sm font-semibold text-foreground">{t.successTitle}</p>
+          <p className="text-xs text-muted-foreground">{t.successMessage}</p>
         </div>
       ) : (
         <>
           <p className="text-xs text-muted-foreground mb-3">
-            Be the first to know when we launch. Enter your email below.
+            {t.description}
           </p>
           <div className="space-y-2">
             <Input
               id="waitlist-email"
               type="email"
-              placeholder="you@company.com"
+              placeholder={t.emailPlaceholder}
               maxLength={254}
               value={email}
               onChange={(e) => { setEmail(e.target.value); setEmailError(null); }}
@@ -67,9 +73,9 @@ const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
             {dbError && <p className="text-xs text-red-500">{dbError}</p>}
             <Button variant="hero" size="sm" className="w-full group" onClick={handleJoin} disabled={loading}>
               {loading ? (
-                <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Joining…</>
+                <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{t.joining}</>
               ) : (
-                <>Join Waitlist<ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" /></>
+                <>{t.joinButton}<ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" /></>
               )}
             </Button>
           </div>
@@ -80,6 +86,9 @@ const WaitlistPopover = ({ onClose }: { onClose: () => void }) => {
 };
 
 const Header = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [showMobileWaitlist, setShowMobileWaitlist] = useState(false);
@@ -98,11 +107,11 @@ const Header = () => {
   }, [showWaitlist]);
 
   const navLinks = [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Features", href: "#features" },
-    { label: "Insights", href: "#insights" },
-    { label: "Meet the team", href: "#team" },
-    { label: "Contact Us", href: "#request-demo" },
+    { label: t.nav.howItWorks, href: "#how-it-works" },
+    { label: t.nav.features, href: "#features" },
+    { label: t.nav.insights, href: "#insights" },
+    { label: t.nav.meetTheTeam, href: "#team" },
+    { label: t.nav.contactUs, href: "#request-demo" },
   ];
 
   return (
@@ -135,6 +144,7 @@ const Header = () => {
 
             {/* Desktop CTAs */}
             <div className="hidden md:flex items-center gap-3">
+              <LanguageToggle />
               <ThemeToggle />
 
               {/* Join The Waitlist button + popover */}
@@ -144,7 +154,7 @@ const Header = () => {
                   size="sm"
                   onClick={() => setShowWaitlist((v) => !v)}
                 >
-                  Join The Waitlist
+                  {t.header.joinWaitlist}
                 </Button>
                 {showWaitlist && (
                   <WaitlistPopover onClose={() => setShowWaitlist(false)} />
@@ -176,8 +186,11 @@ const Header = () => {
                 ))}
                 <div className="flex flex-col gap-2 pt-3 border-t border-border mt-2">
                   <div className="flex items-center justify-between py-2">
-                    <span className="text-sm font-medium text-muted-foreground">Theme</span>
-                    <ThemeToggle />
+                    <span className="text-sm font-medium text-muted-foreground">{t.header.theme}</span>
+                    <div className="flex items-center gap-2">
+                      <LanguageToggle />
+                      <ThemeToggle />
+                    </div>
                   </div>
 
                   {/* Mobile Join The Waitlist */}
@@ -186,7 +199,7 @@ const Header = () => {
                     size="sm"
                     onClick={() => setShowMobileWaitlist((v) => !v)}
                   >
-                    Join The Waitlist
+                    {t.header.joinWaitlist}
                   </Button>
                   {showMobileWaitlist && (
                     <div className="relative">
@@ -202,7 +215,7 @@ const Header = () => {
                       setIsMobileMenuOpen(false);
                     }}
                   >
-                    Contact Us
+                    {t.nav.contactUs}
                   </Button>
                 </div>
               </div>
