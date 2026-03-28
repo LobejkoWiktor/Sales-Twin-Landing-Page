@@ -33,7 +33,7 @@ export const translations = {
       headlineHighlight: "3x szybciej",
       headlinePart2: "dzięki szkoleniom opartym o AI",
       subheadline:
-        "Umożliw swojemu zespołowi sprzedaży ćwiczenie w bezpiecznym środowisku. Symuluj rozmowy, konfiguruj wymagające persony klientów i analizuj wyniki — wszystko w jednej platformie.",
+        "Umożliw swojemu zespołowi sprzedaży ćwiczenie w bezpiecznym środowisku. Symuluj rozmowy, konfiguruj wymagające persony klientów i analizuj wyniki. Wszystko w jednej platformie.",
       testButton: "Przetestuj sam",
       watchVideo: "Obejrzyj film",
       comingSoonTitle: "Wkrótce dostępne",
@@ -47,7 +47,7 @@ export const translations = {
         {
           title: "Realistyczne persony",
           description:
-            "Ćwicz z każdym typem klienta — od przyjaznych prospektów po asertywnych negocjatorów. Każda persona dostosowuje się do Twoich odpowiedzi w czasie rzeczywistym.",
+            "Ćwicz z każdym typem klienta - od przyjaznych prospektów po asertywnych negocjatorów. Każda persona dostosowuje się do Twoich odpowiedzi w czasie rzeczywistym.",
           highlights: ["Oparte o AI", "Adaptacyjne"],
         },
         {
@@ -78,7 +78,7 @@ export const translations = {
         {
           title: "Zdefiniuj personę",
           description:
-            "Ustaw cechy osobowości, poziomy trudności i konkretne cele rozmowy. Od przyjaznych prospektów po asertywnych negocjatorów — Ty decydujesz.",
+            "Ustaw cechy osobowości, poziomy trudności i konkretne cele rozmowy. Od przyjaznych prospektów po asertywnych negocjatorów - Ty decydujesz.",
         },
         {
           title: "Ćwicz i bądź najlepszy",

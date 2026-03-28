@@ -9,15 +9,15 @@ const InsightMockup = () => {
   const bulletPoints =
     language === "pl"
       ? [
-          "Natychmiastowa ocena wydajności po każdej sesji",
-          "Spersonalizowane rekomendacje poprawy",
-          "Śledź postępy całego swojego zespołu",
-        ]
+        "Natychmiastowa ocena wydajności po każdej sesji",
+        "Spersonalizowane rekomendacje poprawy",
+        "Śledź postępy całego swojego zespołu",
+      ]
       : [
-          "Instant performance scoring after every session",
-          "Personalized improvement recommendations",
-          "Track progress across your entire team",
-        ];
+        "Instant performance scoring after every session",
+        "Personalized improvement recommendations",
+        "Track progress across your entire team",
+      ];
 
   const mockupStrengths =
     language === "pl"
@@ -36,7 +36,7 @@ const InsightMockup = () => {
 
   const mockupDesc =
     language === "pl"
-      ? "Nasze AI analizuje każdą symulację w czasie rzeczywistym, dostarczając szczegółowych analiz — co działało, co nie i jak dokładnie to poprawić. Obserwuj, jak rośnie pewność siebie Twojego zespołu."
+      ? "Nasze AI analizuje każdą symulację w czasie rzeczywistym, dostarczając szczegółowych analiz - co działało, co nie i jak dokładnie to poprawić. Obserwuj, jak rośnie pewność siebie Twojego zespołu."
       : "Our AI analyzes every simulation in real-time, providing detailed breakdowns of what worked, what didn't, and exactly how to improve. Watch your team's confidence soar.";
 
   const strengthsLabel = language === "pl" ? "Mocne strony" : "Strengths";
