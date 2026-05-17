@@ -12,10 +12,7 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="text-center">
             <a href="/" className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-9 h-9 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">S</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">SalesTwin</span>
+              <span className="text-3xl font-bold text-foreground tracking-tight" style={{ fontFamily: "'League Spartan', sans-serif" }}>.ZUNUBU</span>
             </a>
             <p className="text-sm text-muted-foreground">
               {t.tagline}

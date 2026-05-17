@@ -121,12 +121,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="/" className="flex items-center gap-2">
-              <img
-                src="/logo.png"
-                alt="SalesTwin Logo"
-                className="w-9 h-9 rounded-xl object-contain"
-              />
-              <span className="text-xl font-bold text-foreground">SalesTwin</span>
+              <span className="text-2xl font-bold text-foreground tracking-tight" style={{ fontFamily: "'League Spartan', sans-serif" }}>.ZUNUBU</span>
             </a>
 
             {/* Desktop Navigation */}

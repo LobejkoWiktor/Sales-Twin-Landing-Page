@@ -123,7 +123,7 @@ export const translations = {
     // Team
     team: {
       sectionTitle: "Poznaj zespół",
-      sectionDesc: "Pasjonaci stojący za SalesTwin, oddani transformacji szkoleń sprzedażowych.",
+      sectionDesc: "Pasjonaci stojący za Zunubu, oddani transformacji szkoleń sprzedażowych.",
       members: [
         {
           description:
@@ -149,7 +149,7 @@ export const translations = {
     // Footer
     footer: {
       tagline: "Szkolenia sprzedażowe oparte o AI, które transformują sposób nauki i zamykania transakcji.",
-      copyright: "© 2026 SalesTwin. Wszelkie prawa zastrzeżone.",
+      copyright: "© 2026 Zunubu. Wszelkie prawa zastrzeżone.",
     },
   },
 
@@ -267,7 +267,7 @@ export const translations = {
     },
     team: {
       sectionTitle: "Meet the team",
-      sectionDesc: "The passionate people behind SalesTwin, dedicated to transforming sales training.",
+      sectionDesc: "The passionate people behind Zunubu, dedicated to transforming sales training.",
       members: [
         {
           description:
@@ -292,7 +292,7 @@ export const translations = {
     },
     footer: {
       tagline: "AI-powered sales training that transforms how teams learn and close.",
-      copyright: "© 2026 SalesTwin. All rights reserved.",
+      copyright: "© 2026 Zunubu. All rights reserved.",
     },
   },
 };
