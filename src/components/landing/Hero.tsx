@@ -38,7 +38,7 @@ const Hero = () => {
               variant="hero"
               size="lg"
               className="group"
-              onClick={() => window.open('https://sales-ai-coach-two.vercel.app/', '_blank')}
+              onClick={() => window.open('https://demo.zunubu.com/', '_blank')}
             >
               {t.testButton}
               <ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
