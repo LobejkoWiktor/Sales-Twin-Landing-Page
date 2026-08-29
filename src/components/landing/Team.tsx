@@ -4,25 +4,19 @@ import { translations } from "@/translations";
 const teamImages = [
   "/images/team/Amadou.png",
   "/images/team/Jakub.png",
-  "/images/team/Mateusz.png",
   "/images/team/Wiktor.png",
-  "/images/team/Zuza.png",
 ];
 
 const teamNames = [
   "Amadou Coulibaly",
   "Jakub Kiernozek",
-  "Mateusz Błajda",
   "Wiktor Łobejko",
-  "Zuza Celejwska",
 ];
 
 const teamLinkedIn = [
   "https://www.linkedin.com/in/amadou-coulibaly/",
   "https://www.linkedin.com/in/jakub-kiernozek-85a056234/",
-  "https://www.linkedin.com/in/blajda/",
   "https://www.linkedin.com/in/wiktor-%C5%82obejko-842752148/",
-  "https://www.linkedin.com/in/zuzanna-celejewska-27a1aa197/",
 ];
 
 const Team = () => {

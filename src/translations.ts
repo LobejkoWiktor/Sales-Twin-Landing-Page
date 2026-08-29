@@ -135,14 +135,7 @@ export const translations = {
         },
         {
           description:
-            "Badacz ML z komercyjnym doświadczeniem, specjalizujący się w LLM i syntezie mowy. Absolwent Uniwersytetu Warszawskiego.",
-        },
-        {
-          description:
             "Programista mobilny z 5-letnim doświadczeniem w budowaniu rozwiązań dla sektora bankowego. Specjalista w solidnych, skoncentrowanych na użytkowniku platformach.",
-        },
-        {
-          description: "Studentka SGH z doświadczeniem biznesowym w sprzedaży i e-commerce.",
         },
       ],
     },
@@ -279,14 +272,7 @@ export const translations = {
         },
         {
           description:
-            "ML Researcher with years of commercial expertise specializing in LLMs and Text-to-Speech synthesis graduated University of Warsaw.",
-        },
-        {
-          description:
             "Mobile developer with 5 years of experience in building solutions for the banking sector. Specialized in robust, user centric platforms.",
-        },
-        {
-          description: "SGH student with business experience in sales and e-commerce.",
         },
       ],
     },
